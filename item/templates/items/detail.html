@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ item.name }}{% endblock %}
+
+{% block content %}
+    <div class="grid grid-cols-5 gap-6">
+        <div class="col-span-3 pb-6 m">
+            <img src = "{{ item.image.url }}" class="rounded-xl">
+        </div>    
+        <div class="col-span-2 p-6 bg-gray-50 rounded-xl ">
+            <h2 class="text-2xl">{{ item.name }}</h2>
+            <p class="text-gray-500"><strong>Price: Php </strong>{{ item.price }}</p>
+            {% if item.description %}
+            <p class="text-gray-500">Description: {{ item.description }}</p>
+            {% endif %}
+            
+            <p class="text-gray-500">Category: {{ item.category.name }}</p>
+            <p class="text-gray-500">Seller: <a href="#" class = "text-blue-500 hover:text-blue-700">{{ item.created_by.username }}</a></p>
+            <p class="text-gray-500">Posted at: {{ item.created_at }}</p>
+            {% if request.user == item.created_by %}
+                <div class=" text-gray-500 rounded-xl">
+                    <p>Added item</p>
+
+                    <a  href="{% url 'item:edit' item.id %}" class="inline-block text-white font-semibold  rounded px-4 py-2 bg-green-500 hover:bg-green-700  ">Edit</a>
+                    <a  href=" {% url 'item:delete' item.id %}" class="inline-block text-white font-semibold  rounded px-4 py-2 bg-red-500 hover:bg-red-700  ">Delete</a>
+                    
+                </div>
+            {% endif %}
+
+            <a  href="{% url 'messaging:new' item.id%}" class="text-white font-bold py-2 px-4 rounded mt-6 bg-blue-500 hover:bg-blue-700  ">Contact Seller</a>
+            <button onclick="" class="mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add to Cart</button>
+        </div>
+    </div>
+    
+    <div class="mt-6 px-6 py-12 bg-gray-50 rounded-xl">
+        <h2 class="mb-12 text-2xl text-center font-semibold">Related Items</h2>
+
+        <div class="grid grid-cols-6 gap-6 auto-rows-fr">
+            {% for item in related_items %}
+                <div class="border rounded-xl shadow-md overflow-hidden flex flex-col">
+                    <a href="{% url 'item:details' item.id %}" class="flex flex-col h-full">
+                        <div>
+                            <p class="text-gray-500 text-sm p-2">{{ item.created_at }}</p>
+                            <img src="{{ item.image.url }}" alt="{{ item.name }}" 
+                                class="rounded-t-xl hover:bg-gray-200 w-full h-48 object-contain">
+                        </div>
+    
+                    <div class="p-6 bg-white rounded-b-xl flex-grow flex flex-col justify-between">
+                        <h2 class="text-2xl">{{ item.name }}</h2>
+                        <p class="text-gray-500">Price: Php {{ item.price }}</p>
+                    </div>
+                    </a>
+                </div>
+            {% endfor %}    
+        </div>
+            
+    </div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Contacts{% endblock %}
+    
+    {% block content %}
+        <div class="px-6 py-6">
+            <form method="GET" action="" >
+                <input type="search" name="search"> 
+                <button type="submit"> Search </button>
+            </form>
+            <h1>This is the contact page</h1>
+            {% if name %}
+                <h2>Hello, {{ name }}!</h2>
+            {% else %}
+                <h2>Hello Visitor!</h2>
+            {% endif %}
+        </div>
+    {% endblock %}
