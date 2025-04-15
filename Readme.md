@@ -1,10 +1,9 @@
-# This project is my first Web page using Python Django
-# that is modeled in an online shopping website
+# This project is my first Web page using Python Django that is modeled in an online shopping website
 
 # Key features:
-# - SignIn/SignUp
-# - CRUD of items
-# - Messaging
+- SignIn/SignUp
+- CRUD of items
+- Messaging
 
 # TODO
 - Add pop-up modals in almost everything(like viewing item details)
